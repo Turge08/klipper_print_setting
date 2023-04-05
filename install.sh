@@ -73,7 +73,7 @@ add_updater()
 {
     echo -e -n "Adding update manager to moonraker.conf... "
 
-    update_section=$(grep -c '\[update_manager print_setting\]' ${MOONRAKER_CONFIG_DIR}/moonraker.conf || true)
+    update_section=$(grep -c '\[update_manager klipper_print_setting\]' ${MOONRAKER_CONFIG_DIR}/moonraker.conf || true)
     if [ "${update_section}" -eq 0 ]; then
         echo -e "\n" >> ${MOONRAKER_CONFIG_DIR}/moonraker.conf
         while read -r line; do
