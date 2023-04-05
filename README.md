@@ -118,7 +118,7 @@ cd klipper_print_setting
 To make these changes persistent across a firmware/host restart, this feature also requires the presence of [save_variables] to be added to your printer.cfg. If you already have save_variables from running ERCF (Enraged Rabbit Carrot Feeder) for example, then the current cfg file will be used to save the persistent print settings. You can really only have 1 [save_variables] entry.
 
 <pre>[save_variables]
-filename: ~/klipper_config/saved_variables.cfg</pre>
+filename: ~/printer_data/config/saved_variables.cfg</pre>
 
 ## Optional:
 
