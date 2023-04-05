@@ -1,0 +1,5 @@
+[update_manager klipper_print_setting]
+type: git_repo
+path: ~/klipper_print_setting
+origin: https://github.com/Turge08/klipper_print_setting
+is_system_service: False
