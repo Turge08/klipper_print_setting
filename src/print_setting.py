@@ -2,12 +2,10 @@ class print_setting:
     def __init__(self, config):
         self.name = config.get_name().split()[-1]
         self.printer = config.get_printer()
-        self.variables = self.printer.lookup_object('save_variables').allVariables
         self.type = config.get('type')
         self.description = config.get('description', '')
-        self.value = self.variables.get('setting_%s' % self.name, config.get('default'))
+        self.value = config.get('default')
         self.gcode = self.printer.lookup_object('gcode')
-        #self.test = self.name.replace("_", " ")
         if self.type == 'bool':
             self.gcode.register_command(("DISABLE_%s" % self.name).upper(),
                 self.cmd_DISABLE_SETTING,
@@ -18,6 +16,12 @@ class print_setting:
         self.gcode.register_mux_command("SET_SETTING", "SETTING", self.name,
             self.cmd_SET_SETTING,
             desc=self.cmd_SET_SETTING_help)
+	self.printer.register_event_handler("klippy:connect",
+	    self.handle_connect)
+
+    def handle_connect(self):
+        variables = self.printer.lookup_object('save_variables').allVariables
+        self.value = variables.get('setting_%s' % self.name, self.value)
 
     def cmd_DISABLE_SETTING(self, gcmd):
         self.value = False
