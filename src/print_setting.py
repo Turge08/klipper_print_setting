@@ -16,8 +16,8 @@ class print_setting:
         self.gcode.register_mux_command("SET_SETTING", "SETTING", self.name,
             self.cmd_SET_SETTING,
             desc=self.cmd_SET_SETTING_help)
-	self.printer.register_event_handler("klippy:connect",
-	    self.handle_connect)
+        self.printer.register_event_handler("klippy:connect",
+            self.handle_connect)
 
     def handle_connect(self):
         variables = self.printer.lookup_object('save_variables').allVariables
