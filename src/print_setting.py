@@ -37,10 +37,11 @@ class print_setting:
     def cmd_SET_SETTING(self, gcmd):
         setting_name = gcmd.get('SETTING')
         self.value = gcmd.get('VALUE')
-        if self.value == 'True':
-            self.value = True
-        else:
-            self.value = False
+        if self.type == 'bool':
+            if self.value.upper() == 'TRUE':
+                self.value = True
+            else:
+                self.value = False
         gcmd.respond_info("Setting %s to %s" % (setting_name, self.value))
         self.gcode.run_script_from_command("SAVE_VARIABLE VARIABLE=setting_%s VALUE=%s" % (setting_name, self.value))
 
