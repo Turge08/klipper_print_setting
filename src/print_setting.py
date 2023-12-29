@@ -42,8 +42,11 @@ class print_setting:
                 self.value = True
             else:
                 self.value = False
-        gcmd.respond_info("Setting %s to %s" % (setting_name, self.value))
-        self.gcode.run_script_from_command("SAVE_VARIABLE VARIABLE=setting_%s VALUE=%s" % (setting_name, self.value))
+        gcmd.respond_info("Setting %s of type %s to %s" % (setting_name, self.type, self.value))
+        if self.type == 'string':
+            self.gcode.run_script_from_command("SAVE_VARIABLE VARIABLE=setting_%s VALUE='\"%s\"'" % (setting_name, self.value))
+        else:
+            self.gcode.run_script_from_command("SAVE_VARIABLE VARIABLE=setting_%s VALUE=%s" % (setting_name, self.value))
 
     def get_status(self, eventtime):
         return {
